@@ -14,7 +14,7 @@ The project uses a reproducible 2.5D MRI pipeline, a simple convolutional
 neural network (CNN) baseline, and ConvNeXt V2 Tiny as the main deep learning
 architecture.
 
-Grad-CAM and SHAP are planned as the primary post-hoc explanation methods.
+Grad-CAM and SHAP are implemented as the primary post-hoc explanation methods.
 
 ---
 
@@ -250,10 +250,28 @@ cohorts.
 
 ## Explainability and Robustness
 
-The later experimental phase will evaluate:
+Two post-hoc explanation methods are currently implemented:
 
-- Grad-CAM
-- SHAP
+- **Grad-CAM**
+- **SHAP GradientExplainer**
+
+Grad-CAM targets the depthwise convolution in the final ConvNeXt V2 block.
+Because the Stage-1 backbone is frozen, the explanation pipeline enables
+gradients on an explanation-only copy of the input. This provides the gradient
+path required for Grad-CAM without unfreezing or updating model parameters.
+
+SHAP uses a background set drawn from training data only. Raw signed
+channel-wise SHAP values are preserved for the three MRI slices. A normalized
+2D attribution-magnitude map is also produced by averaging the absolute SHAP
+magnitude across the three channels for visualization and future spatial
+comparison.
+
+Both methods have passed functional checks on development data. These checks
+verify that valid, non-constant spatial explanation maps can be generated and
+are not treated as experimental robustness results.
+
+The later robustness experiments will evaluate explanation stability under:
+
 - natural perturbations: noise, blur, and rotation
 - adversarial perturbations: FGSM and PGD
 
@@ -278,6 +296,7 @@ MRI_XAI_Robustness/
 │   ├── evaluate.py
 │   ├── metrics.py
 │   ├── utils.py
+│   ├── xai.py
 │   └── models/
 │       ├── __init__.py
 │       ├── baseline.py
@@ -285,7 +304,8 @@ MRI_XAI_Robustness/
 ├── notebooks/
 │   ├── 01_data_check.ipynb
 │   ├── 02_baseline.ipynb
-│   └── 03_main_model.ipynb
+│   ├── 03_main_model.ipynb
+│   └── 04_xai_check.ipynb
 ├── data/
 │   └── manifests/
 ├── checkpoints/
@@ -358,13 +378,18 @@ The following components have been implemented and validated:
 - stack-to-participant prediction aggregation
 - participant-level evaluation metrics
 - reproducibility utilities
+- Grad-CAM explanation pipeline
+- SHAP GradientExplainer pipeline
+- XAI functionality checks
 
 The current repository represents the code-development stage of the project.
 Development experiments are used to verify that the pipeline functions correctly
 and are not presented as final scientific results.
 
-The explainability, perturbation, robustness, final NACC evaluation, and ADNI
-external-validation experiments are subsequent stages of the study.
+The Grad-CAM and SHAP implementation stage is complete at the functional-check
+level. Full perturbation and explanation-robustness experiments, final NACC
+evaluation, and ADNI external-validation experiments are subsequent stages of
+the study.
 
 ---
 
