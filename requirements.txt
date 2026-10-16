@@ -1,0 +1,16 @@
+# MRI XAI Robustness Project
+# Python dependencies
+#
+# External system tools such as dcm2niix are documented
+# separately in the README.
+
+numpy
+pandas
+scikit-learn
+torch
+torchvision
+timm
+nibabel
+antspyx
+HD-BET
+matplotlib

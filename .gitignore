@@ -1,0 +1,155 @@
+# ============================================================
+# MRI XAI Robustness Project
+# ============================================================
+
+
+# ------------------------------------------------------------
+# CONTROLLED / RAW MRI DATA
+# Never commit NACC or ADNI imaging data
+# ------------------------------------------------------------
+
+data/**/raw/
+data/**/raw_zips/
+data/**/derived/
+data/**/DICOM/
+data/**/dicom/
+data/**/ADNI_DICOM/
+data/**/*raw*.zip
+data/**/*.nii
+data/**/*.nii.gz
+data/**/*.dcm
+data/**/*.npy
+
+
+# ------------------------------------------------------------
+# Project MRI preprocessing outputs
+# ------------------------------------------------------------
+
+data/**/25d_stacks_normalized/
+data/**/preprocessed/
+data/**/registered/
+data/**/brain_masks/
+data/**/temporary/
+data/**/tmp/
+
+
+# ------------------------------------------------------------
+# Model checkpoints / trained weights
+# ------------------------------------------------------------
+
+checkpoints/*
+!checkpoints/.gitkeep
+
+*.pt
+*.pth
+*.ckpt
+
+
+# ------------------------------------------------------------
+# Python cache / compiled files
+# ------------------------------------------------------------
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# ------------------------------------------------------------
+# Jupyter / Colab temporary files
+# ------------------------------------------------------------
+
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+
+# ------------------------------------------------------------
+# Operating-system files
+# ------------------------------------------------------------
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ------------------------------------------------------------
+# IDE / editor files
+# ------------------------------------------------------------
+
+.vscode/
+.idea/
+
+
+# ------------------------------------------------------------
+# Temporary files
+# ------------------------------------------------------------
+
+*.tmp
+*.temp
+*.log
+~$*
+
+
+# ------------------------------------------------------------
+# Environment / credentials
+# ------------------------------------------------------------
+
+.env
+.env.*
+*.pem
+*.key
+credentials*
+secrets*
+.aws/
+
+
+# ------------------------------------------------------------
+# Python environments
+# ------------------------------------------------------------
+
+venv/
+.venv/
+env/
+ENV/
+
+
+# ------------------------------------------------------------
+# CONTROLLED / PARTICIPANT-LEVEL METADATA
+#
+# NACC/ADNI participant manifests and QC metadata remain local.
+# Repository users should obtain controlled data directly from
+# the authorized data providers.
+# ------------------------------------------------------------
+
+data/manifests/*.csv
+data/**/*.csv
+data/**/*.xlsx
+data/**/*.json
+
+
+# ------------------------------------------------------------
+# GENERATED EXPERIMENTAL RESULTS
+#
+# Keep development predictions, training logs, and other
+# generated outputs local during the project.
+# ------------------------------------------------------------
+
+results/**/*.csv
+results/**/*.xlsx
+results/**/*.json
+
+
+# ------------------------------------------------------------
+# Preserve empty repository directory structure
+# ------------------------------------------------------------
+
+!data/.gitkeep
+!data/manifests/.gitkeep
+
+!results/.gitkeep
+!results/logs/.gitkeep
+!results/figures/.gitkeep
+!results/metrics/.gitkeep
+
+# Additional controlled/generated MRI data protection
+data/**/*.zip
+data/**/*.mat
